@@ -6,6 +6,16 @@ body {
     max-width: 100ch;
     margin-inline: max(1em, (100% - 100ch) / 2);
   }
+  .projects{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    gap: 1em;
+  }
+  h2{
+    margin: 0;
+  }
   :root{
     --pink: oklch(65% 50% 0);
   }

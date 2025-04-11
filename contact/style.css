@@ -6,33 +6,22 @@ body {
     max-width: 100ch;
     margin-inline: max(1em, (100% - 100ch) / 2);
   }
-  form{
+  .Form{
     font: inherit;
-    display:grid;
+    display: grid;
     grid-template-columns: subgrid;
     grid-column: 1 / -1;
     gap: 1em;
   }
-  /* input{
-    font: inherit;
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    margin-block: 5px 20px;
+  input{
+    grid-template-columns: subgrid;
   }
   .Body{
-    font: inherit;
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    margin-block: 5px 20px;
+    grid-template-columns: subgrid;
   }
   .Button{
-    font: inherit;
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-  } */
+    grid-template-columns: subgrid;
+  }
   :root{
     --pink: oklch(65% 50% 0);
   }
