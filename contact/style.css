@@ -9,11 +9,22 @@ body {
   .Form{
     font: inherit;
     display: grid;
-    grid-template-columns: subgrid;
-    grid-column: 1 / -1;
+    grid-template-columns: auto 1fr;
     gap: 1em;
   }
-  input{
+  label{
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+    /* display: contents; */
+  }
+  .Button{
+    grid-column: 1 / -1;
+  }
+  /* .Email{
+    grid-template-columns: subgrid;
+  }
+  .Subject{
     grid-template-columns: subgrid;
   }
   .Body{
@@ -21,7 +32,7 @@ body {
   }
   .Button{
     grid-template-columns: subgrid;
-  }
+  } */
   :root{
     --pink: oklch(65% 50% 0);
   }
