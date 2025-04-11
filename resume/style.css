@@ -1,0 +1,40 @@
+body {
+    /* Set line height to 1.5 times the font size
+         and use the OS’s UI font as the website font
+       */
+    font: 100%/1.5 system-ui;
+    max-width: 100ch;
+    margin-inline: max(1em, (100% - 100ch) / 2);
+  }
+  :root{
+    --pink: oklch(65% 50% 0);
+  }
+  html{
+    accent-color: var(--pink);
+  }
+  nav{
+    display: flex;
+  }
+  a{
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    padding: 0.5em;
+    margin-bottom: auto;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: oklch(80% 3% 200);
+  }
+  .Resume{
+    flex: 1;
+    border-bottom-width: 0.4em;
+    border-bottom-color: oklch(82% 3% 200);
+    padding-bottom: 0.202em;
+  }
+  a:hover{
+    border-bottom-width: 0.4em;
+    border-bottom-color: oklch(65% 50% 0);
+    padding-bottom: 0.202em;
+    background-color: oklch(from var(--pink) 95% 5% h)
+  }
