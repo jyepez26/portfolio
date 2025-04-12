@@ -13,6 +13,10 @@ body {
     border-top: 1px solid lightblue;
     border-bottom: 1px solid lightblue;
   }
+  img{
+    max-width: 100%;
+    height: auto;
+  }
   h1,h2,h3,h4,h5,h6{
     line-height: 1.1;
     text-wrap: balance;
