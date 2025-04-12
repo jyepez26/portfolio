@@ -21,18 +21,14 @@ body {
   .Button{
     grid-column: 1 / -1;
   }
-  /* .Email{
-    grid-template-columns: subgrid;
+  h1,h2,h3,h4,h5,h6{
+    line-height: 1.1;
+    text-wrap: balance;
   }
-  .Subject{
-    grid-template-columns: subgrid;
+  h1{
+    font-size: 400%;
   }
-  .Body{
-    grid-template-columns: subgrid;
-  }
-  .Button{
-    grid-template-columns: subgrid;
-  } */
+  
   :root{
     --pink: oklch(65% 50% 0);
   }

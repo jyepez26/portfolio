@@ -6,6 +6,23 @@ body {
     max-width: 100ch;
     margin-inline: max(1em, (100% - 100ch) / 2);
   }
+  .Heading{
+    display:grid;
+    grid-template-columns: auto 1fr;
+    gap: 15em;
+    border-top: 1px solid lightblue;
+    border-bottom: 1px solid lightblue;
+  }
+  h1,h2,h3,h4,h5,h6{
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  h1{
+    font-size: 400%;
+  }
+  h2{
+    font-size: 200%;
+  }
   :root{
     --pink: oklch(65% 50% 0);
   }
