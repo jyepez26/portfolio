@@ -6,6 +6,9 @@ body {
     max-width: 100ch;
     margin-inline: max(1em, (100% - 100ch) / 2);
   }
+  .color-scheme{
+    display: block;
+  }
   .Form{
     font: inherit;
     display: grid;
@@ -34,9 +37,11 @@ body {
   }
   html{
     accent-color: var(--pink);
+    color-scheme: dark;
   }
   nav{
     display: flex;
+    --border-color: oklch(50% 10% 200 / 40%);
   }
   a{
     flex: 1;
@@ -49,15 +54,22 @@ body {
     border-bottom-style: solid;
     border-bottom-color: oklch(80% 3% 200);
   }
-  .Contact{
+  .current{
     flex: 1;
     border-bottom-width: 0.4em;
-    border-bottom-color: oklch(82% 3% 200);
+    border-bottom-color: var(--border-color);
     padding-bottom: 0.202em;
   }
   a:hover{
     border-bottom-width: 0.4em;
     border-bottom-color: oklch(65% 50% 0);
     padding-bottom: 0.202em;
-    background-color: oklch(from var(--pink) 95% 5% h)
+    background-color: color-mix(in oklch, var(--pink), canvas 85%);
+  }
+  .color-scheme{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 80%;
+    font-family: inherit;
   }
