@@ -8,3 +8,7 @@ const projectsContainer = document.querySelector('.projects');
 
 // use renderProjects to dynamically dislay json data
 renderProjects(projects, projectsContainer, 'h2');
+
+// change title to the amount of projects
+const title = document.querySelector('.projects-title');
+title.innerHTML = `${projects.length} Projects`;
