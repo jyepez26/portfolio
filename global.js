@@ -84,7 +84,6 @@ export async function fetchJSON(url) {
     if (!response.ok) {
       throw new Error(`Failed to fetch projects: ${response.statusText}`);
     }
-    console.log(response);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -93,7 +92,6 @@ export async function fetchJSON(url) {
 }
 
 export function renderProjects(project, containerElement, headingLevel = 'h2') {
-  // code
   containerElement.innerHTML = '';
   for (let i=0; i<project.length; i++) {
     const article = document.createElement('article');
@@ -104,4 +102,8 @@ export function renderProjects(project, containerElement, headingLevel = 'h2') {
     `;
     containerElement.appendChild(article);
   }
+}
+
+export async function fetchGitHubData(username) {
+  return fetchJSON(`https://api.github.com/users/${username}`);
 }

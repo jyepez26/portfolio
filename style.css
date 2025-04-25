@@ -7,13 +7,41 @@ body {
   margin-inline: max(1em, (100% - 100ch) / 2);
 }
 h1,h2,h3,h4,h5,h6{
-  font-size: 400%;
   line-height: 1.1;
   text-wrap: balance;
 }
-.image{
-  max-width: 100%;
-  height: auto;
+h1{
+  font-size: 400%;
+}
+h2{
+  margin: 0;
+  font-size: 200%;
+}
+h3{
+  font-size: 150%;
+}
+dl{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+}
+dt{
+  grid-row-start: 1;
+  grid-row-end: 2;
+  font-size: 90%;
+  color: gray;
+}
+dd{
+  grid-row-start: 2;
+  grid-row-end: 3;
+  font-size: 150%;
+}
+.projects{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+  gap: 1em;
 }
 :root{
   --pink: oklch(65% 50% 0);

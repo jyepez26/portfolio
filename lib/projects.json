@@ -1,61 +1,73 @@
 [
     {
-        "title": "Lorem ipsum dolor sit.",
+        "title": "Premier League Clustering Project",
+        "year": "2025",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi soluta nobis sapiente enim excepturi eaque explicabo officia reprehenderit expedita similique. Debitis doloremque ullam corrupti quos modi, dolor laudantium sapiente error?"
+        "description": "In this project I looked at data on all forwards in the current Premier League season so far, and determining different player types using a machine learning algorithm knowns as KNMeans clustering."
     },
     {
-        "title": "Sapiente animi repellat ipsum?",
+        "title": "Energy Data Analysis Project",
+        "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Nemo, dolores facilis doloremque, dolore saepe adipisci tenetur eveniet reprehenderit accusamus facere voluptates, nostrum soluta maxime libero blanditiis inventore fuga quas! Ipsum labore porro repudiandae officia maiores qui corporis id?"
+        "description": "Throughout this project, I explored a dataset on major power outages in different states throughout the U.S. containing data from January 2000-July 2016. I conducted exploratory data analysis, hyppthesis tests and ultimately built a predictive model to predict the cause of a power outage."
     },
     {
-        "title": "Perspiciatis blanditiis debitis accusamus.",
+        "title": "Climate Project",
+        "year": "2025",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "In molestias illo praesentium deserunt, reprehenderit facere ab? Eligendi dignissimos, laudantium labore nulla recusandae rem? Consectetur ipsam minus quisquam quis? Necessitatibus excepturi cum assumenda laborum cupiditate ratione nostrum dicta commodi!"
+        "description": "In this project, I will be researching extreme weather events in order to find trends, conduct a hypothesis test, and create a predictive model for future weather events."
     },
     {
-        "title": "Sequi ipsam maiores provident?",
+        "title": "DSC 106 Project 1",
+        "year": "2025",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "A id quisquam ea dolore eos ex reprehenderit magni velit? Adipisci libero quibusdam sapiente nobis cumque odit nemo? Ducimus pariatur repellendus necessitatibus cum impedit voluptatibus rerum id dolorum laudantium alias!"
+        "description": "In this assignment, I designed an expository visualization to clearly communicate an idea based on a small data set. In addition, I provided a rigorous rationale for my design choices."
     },
     {
         "title": "Incidunt illum corrupti molestiae!",
+        "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Ipsa quis velit repudiandae officiis dolorum quam architecto aliquid odit asperiores unde? Magni accusamus dolorum illo consequuntur saepe reprehenderit dolores velit dolor veniam, vitae repellendus placeat non doloremque vel excepturi?"
     },
     {
         "title": "Explicabo provident nam voluptatum.",
+        "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Dicta, consequatur libero. Accusamus tempora pariatur nemo consectetur corrupti ea hic dignissimos corporis? Eligendi hic aliquam nobis magni repudiandae rem reiciendis, ea unde voluptatem amet beatae, iure aspernatur perferendis facere?"
     },
     {
         "title": "Quisquam distinctio itaque excepturi?",
+        "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Laudantium quos molestias corporis tenetur nesciunt a vero itaque reprehenderit unde natus illum cumque commodi, excepturi voluptatem nihil blanditiis odit ex eaque voluptatibus soluta? Harum voluptatum facere ipsum numquam possimus?"
     },
     {
         "title": "Accusamus aut dicta at?",
+        "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Facere, rerum molestias totam nobis odit veritatis. Quo, ab dicta! Iusto quia repellendus exercitationem praesentium, quaerat eveniet ab dolorem eaque perspiciatis velit esse deserunt, amet fugit minus? Similique, officia placeat?"
     },
     {
         "title": "Ipsam, in! Reiciendis, debitis.",
+        "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Ut incidunt voluptates cum eveniet harum, eaque cumque consequatur ea beatae. Unde dolore ex nostrum quod neque blanditiis magni, voluptate itaque tempora iusto minima sed atque quisquam culpa, deleniti tempore!"
     },
     {
         "title": "Doloremque velit neque eveniet.",
+        "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Assumenda, natus accusamus necessitatibus, at optio consectetur corrupti inventore molestiae explicabo ullam, earum expedita debitis dolor officia nulla distinctio numquam eius recusandae? Fugit suscipit porro vitae ratione, ab aliquid placeat."
     },
     {
         "title": "Error voluptates eaque odit!",
+        "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Consectetur nisi vero tempora numquam suscipit amet labore praesentium. Ipsa dolorem corporis minus? Dolores minima sapiente expedita minus est quisquam similique cum nobis nisi quidem dolorem, atque commodi corrupti reiciendis!"
     },
     {
         "title": "Libero corporis totam obcaecati.",
+        "year": "2024",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Totam consequatur necessitatibus maxime ipsum itaque unde debitis illum vero architecto ea accusamus voluptates aspernatur distinctio quos ducimus fugiat ab ut laudantium quia, possimus molestias neque? Quaerat voluptate repudiandae neque!"
     }
