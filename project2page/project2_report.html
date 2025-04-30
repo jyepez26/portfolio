@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Project 2 Report</title>
+    <style>
+      :root {
+        --color-neutral-95: hsl(220 10% 95%);
+        --color-neutral-90: hsl(220 10% 90%);
+        --color-neutral-80: hsl(220 10% 80%);
+        --color-neutral-70: hsl(220 10% 70%);
+        --color-neutral-60: hsl(220 10% 60%);
+        --color-neutral-50: hsl(220 10% 50%);
+        --color-neutral-40: hsl(220 10% 40%);
+        --color-neutral-30: hsl(220 10% 30%);
+        --color-neutral-20: hsl(220 10% 20%);
+        --color-neutral-10: hsl(220 10% 10%);
+      }
+
+      html {
+        font: 100%/1.5 system-ui;
+        counter-reset: figure;
+        background: var(--color-neutral-95);
+        max-width: min(75vw, 80em);
+        margin: 0 auto;
+      }
+
+      /* Headings */
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        line-height: 1.1;
+        font-weight: 600;
+        text-wrap: balance;
+      }
+
+      h1,
+      h2 {
+        border-bottom: 1px solid var(--color-neutral-80);
+        padding-bottom: 0.2em;
+      }
+
+      h1 {
+        margin-block: 1em 0.5rem;
+        font-size: clamp(2.5em, 150% + 2vh + 2vw, 10vmin);
+        font-weight: 800;
+
+        small {
+          display: block;
+          width: fit-content;
+          padding: 0.2em 0.5em;
+          margin-inline: auto;
+          color: white;
+          background: var(--color-neutral-40);
+          font-size: 40%;
+          text-transform: uppercase;
+          white-space: nowrap;
+        }
+      }
+
+      h2 {
+        font-size: 180%;
+        color: var(--color-neutral-30);
+      }
+
+      h3 {
+        font-size: 130%;
+      }
+
+      /* Lists */
+
+      ul,
+      ol {
+        padding-inline-start: 2em;
+      }
+
+      li {
+        &::marker {
+          color: var(--color-neutral-40);
+        }
+
+        + li {
+          margin-top: 0.2em;
+        }
+      }
+
+      /* Sectioning elements */
+
+      header {
+        padding-block: 1em;
+        text-align: center;
+      }
+
+      main {
+        background: white;
+        color: var(--color-neutral-20);
+        border-radius: 1rem;
+        padding: 0.1rem 2rem;
+      }
+
+      /* Figures */
+
+      figure {
+        margin: 1em 0;
+        padding: 0.5rem;
+        margin-inline: -0.5em;
+        border: 1px solid var(--color-neutral-80);
+        box-shadow: 0 0.1em 0.2em var(--color-neutral-95);
+        text-align: center;
+        background: white;
+
+        > figcaption {
+          font: 500 75% var(--font-sans);
+          background: var(--color-neutral-95);
+          padding: 0.5rem;
+          margin: -0.5rem;
+          margin-top: 0.5rem;
+          counter-increment: figure;
+          text-align: left;
+
+          &::before {
+            content: 'Figure ' counter(figure) ': ';
+            font-weight: bold;
+            color: var(--color-neutral-40);
+          }
+
+          a:not(:hover, :focus, :active) {
+            color: inherit;
+            text-decoration: underline;
+            text-decoration-color: color-mix(
+              in lab,
+              currentColor,
+              transparent 70%
+            );
+          }
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>
+        <small>Assignment 4</small>
+        Persuasive or Deceptive Visualization?
+      </h1>
+
+      <p><strong>Jonathan Yepez</strong> — <em>joyepez@ucsd.edu</em></p>
+    </header>
+
+    <main>
+      <h2>Proposition: American Indian Officers are Treated Unjustly in Accusation Outcomes.</h2>
+
+      <section>
+        <h3>FOR the Proposition</h3>
+
+        <figure>
+          <img src="non_deceptive_img.png" alt="non_deceptive_img" width="800px"/>
+          <figcaption>This is my argument in support of my proposition.</figcaption>
+        </figure>
+
+        <p>Design Decisions and Rationale:</p>
+
+        <ul>
+          <li>One design decision I made was a transformation of the actual dataset. I grouped by the officer ethnicity and took the count, but split the data into two datasets: one with all the accusations that turned into an arrest and one with all the accusations that didn’t. This data transformation allowed me to find the ratios and display the data on each ethnicity in my visualization. I would say that this choice gets a score of +1 for being earnest. The reason it is not fully earnest is because the count for American Indian officers is much lower than the other ethnicities which could lead to the big variation in ratios since the others are so similar. However, I believe there are still enough accusations against American Indian officers for the trend to be accurate, since there is such a large difference in both ratios.</li>
+          <li>Another design choice I made were the colors in the visualization. I decided to go with a silver and blue theme since those are police colors. Initially I had green and purple as my colors which looked nice, but they didn’t fit the theme at all which is why I ultimately chose blue and silver. Additionally, I used a bar plot because it was the best way to display the categorical data I wanted to explain. I thought about using a line plot, but that wouldn’t make sense with categorical data, so I went with a bar plot instead. This is an earnest +2 design choice, as there is no deception going on here!</li>
+          <li>Another design choice I made was the annotations. I used a two-sided arrow and numbers to demonstrate the difference between the non-arrest per accusation ratio and the arrest/summons per accusation ratio. This allowed me to highlight how the non-arrest ratio for American Indians is very low and their arrest/summons ratio is high compared to other ethnicities. I also highlighted the American Indian difference in ratio to further emphasize this point. Initially I had an arrow pointing at the high bar and low bar for American Indians and wrote text saying that those are the highest and lowest points, but I realized this didn’t add any substance. Therefore, instead I chose to use arrows inside of the bars and have them show how the difference in ratio is much larger for American Indian officers than for other ethnicities. This was another earnest +1.5 design choice, as it runs into the same quantity issue as the first design choice, but the numbers showing the difference between the two ratios are truthful, so it is still relatively earnest. </li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>AGAINST the Proposition</h3>
+
+        <figure>
+          <img src="deceptive_img.png" alt="deceptive_img" width="800px"/>
+          <figcaption>This is my argument against my proposition.</figcaption>
+        </figure>
+
+        <p>Design Decisions and Rationale:</p>
+
+        <ul>
+          <li>One design decision I made was a transformation of the dataset. I grouped again by the officer ethnicity and took the count, but this time only kept data with all the accusations that turned into an arrest or summons. This data transformation allowed me to find the number of arrests in each ethnicity and display that data in my visualization. I would say that this choice gets a score of -1 for being deceptive. While the numbers are accurate, the trend is only this way due to the fact there are not very many American Indians police officers, and potentially that American Indian officers generally don’t get as many accusations. That is why a ratio is more accurate, since it shows that there is a discrepancy, which you see the opposite of in this visualization. Initially I thought about using non-arrests instead of arrests, but I decided that showing data for arrests is more powerful than non-arrests.</li>
+          <li>Another design choice I made were the colors in the visualization. I decided to go with a silver and blue theme since those are police colors. Initially I had green and purple for this visualization just like my other visualization since I thought the colors looked nice, but they didn’t fit the theme at all which is why I ultimately chose blue and silver. Additionally, I used a bar plot again because it is the best way to display categorical data. I thought about using a stackplot, but that wouldn’t make sense with this categorical data with no trends, so I went with a bar plot instead. This is an earnest +1.5 design choice, since there is really deception going on with these design choices.</li>
+          <li>Another design choice I made was adding the count visually above each bar. I used these numbers to demonstrate the count clearly, so the viewer can quickly access the number without having to look at the y-axis and make a guess. This choice let me highlight how the arrest count for American Indians is very low compared to all the other ethnicities, where I also bolded the number for extra emphasis. This was also a slightly deceptive -0.5 design choice. It runs into the same issue as the first design choice, where the number is very low for American Indian arrests. This makes the trend look like the system favors American Indian officers. However, the low count is most likely due to other reasons explained earlier, because when we look at the ratios, American Indian officers are actually treated unfairly compared to other ethnicities.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Final Reflection</h2>
+
+        <p>	Over both visualizations, my design process was not super straightforward. At first, I had trouble even identifying trends that were noteworthy enough. I finally found success when I started to group by ethnicity and looked at trends there. However, even when I was able to find a proposition, I struggled to find the idea for a deceptive visualization. I think through the process, actually implementing the ideas was pretty straightforward, but figuring out the best way to visualize a deceptive argument that opposed my initial proposition was difficult to formulate. What surprised me about this process was how deceptive visualization can come from earnest practices. For my deceptive visualization, I used mostly earnest practices, but I kind of took the data out of context to make it look like one trend exists when it is not necessarily true. But, I didn’t actually change the data, it was more just issues with the underlying data collection which lacked data on certain ethnicities while it was rich in data on other ethnicities.
+          <br>
+          Now, I would define “ethical analysis and visualization” as ensuring that you do not make any changes to the data itself, and that you make sure that you are putting the data into the proper context. It is really easy to take data out of context to show trends, for example when the count is really low for some categories and really high for others. The bounds that I would draw for “acceptable” persuasive choices vs. “misleading” ones are twofold. My first bound would be to not change the data aside from aggregation when grouping or simple transformations like log scaling or other normal data transformations. The second bound that I would draw is to ensure that data is in context. For example, if one category lacks data while another has plenty, make sure to account for this and maybe use ratios instead of counts, and explain how the count is lower in the visualization. Overall, it is just important to make sure that the viewer of the visualization understands any major transformations made on the data!
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
