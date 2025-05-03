@@ -1,44 +1,8 @@
 import { fetchJSON, renderProjects } from '../global.js';
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 
-// // create circle
-// let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
-
 // get data from projects json
 const projects = await fetchJSON('../lib/projects.json');
-
-// let rolledData = d3.rollups(
-//   projects,
-//   (v) => v.length,
-//   (d) => d.year,
-// );
-// let data = rolledData.map(([year, count]) => {
-//   return { value: count, label: year };
-// });
-
-// // create pie chart
-// let sliceGenerator = d3.pie().value((d) => d.value);
-// let arcData = sliceGenerator(data)
-// let arcs = arcData.map((d) => arcGenerator(d));
-// let colors = d3.scaleOrdinal(d3.schemeTableau10);
-// arcs.forEach((arc, idx) => {
-//   d3.select('svg')
-//     .append('path')
-//     .attr('d', arc)
-//     .attr('d', arc)
-//     .attr('fill',colors(idx))
-// });
-
-
-// // make legend
-// let legend = d3.select('.legend');
-// data.forEach((d, idx) => {
-//   legend
-//     .append('li')
-//     .attr('style', `--color:${colors(idx)}`) // set the style attribute while passing in parameters
-//     .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`); // set the inner html of <li>
-// });
-
 
 // select the container we want to render json into
 const projectsContainer = document.querySelector('.projects');
@@ -111,7 +75,10 @@ function renderPieChart(projectsGiven) {
             // TODO: filter projects and project them onto webpage
             // Hint: `.label` might be useful
             const selectedLabel = newData[selectedIndex].label;
-            const filteredProjects = projects.filter(d => d.label === selectedLabel);
+            const filteredProjects = projects.filter(p => {
+              const match =  p.year === selectedLabel;
+              return match
+            });
             renderProjects(filteredProjects, projectsContainer, 'h2');
           }
       });
@@ -141,16 +108,3 @@ searchInput.addEventListener('change', (event) => {
   renderPieChart(filteredProjects);
 });
 
-
-// let svg = d3.select('svg');
-// svg.selectAll('path').remove();
-// arcs.forEach((arc, i) => {
-//   svg
-//     .append('path')
-//     .attr('d', arc)
-//     .attr('fill', colors(i))
-//     .on('click', () => {
-//       // What should we do? (Keep scrolling to find out!)
-//       selectedIndex = selectedIndex === i ? -1 : i;
-//     });
-// });

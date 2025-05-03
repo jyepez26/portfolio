@@ -61,7 +61,7 @@ body {
     cursor: pointer;
   }
   .selected {
-    --color: oklch(80% 35% 0) !important;
+    --color: oklch(70% 70% 335) !important;
   
     &:is(path) {
       fill: var(--color);
