@@ -13,6 +13,66 @@ body {
     grid-row: span 3;
     gap: 1em;
   }
+  #projects-plot {
+    max-width: 20em;
+    margin-block: 2em;
+    overflow: visible;
+  }
+  .container{
+    display: grid;
+    flex: 1;
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+    padding-bottom: 1.5em;
+  }
+  .legend{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+    border-style: solid;
+    border-color: gray;
+    gap: 1em;
+    padding: 1em;
+  }
+  .legend li{
+    display: flex;
+    gap: 0.7em;
+  }
+  .swatch{
+    width: 30px;
+    height: 30px;
+    aspect-ratio: 1 / 1;
+    background-color: var(--color);
+    border-radius: 50%;
+  }
+  .searchBar{
+    height: 50px;
+    font-size: 20px;
+    text-align: left;
+    padding: 1em;
+    grid-column: 1 / -1;
+  }
+  &:has(path:hover) {
+    path:not(:hover) {
+      opacity: 0.5;
+    }
+  }
+  path{
+    transition: 300ms;
+    cursor: pointer;
+  }
+  .selected {
+    --color: oklch(80% 35% 0) !important;
+  
+    &:is(path) {
+      fill: var(--color);
+    }
+  }
+
+  .year{
+    font-family: cursive;
+    font-variant-numeric: oldstyle-nums;
+    color: gray;
+  }
   h1,h2,h3,h4,h5,h6{
     line-height: 1.1;
     text-wrap: balance;
