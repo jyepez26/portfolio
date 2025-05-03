@@ -104,6 +104,16 @@ function renderPieChart(projectsGiven) {
             // TODO: filter idx to find correct pie slice and apply CSS from above
             idx === selectedIndex ? 'selected' : null
           ));
+        
+          if (selectedIndex === -1) {
+            renderProjects(projects, projectsContainer, 'h2');
+          } else {
+            // TODO: filter projects and project them onto webpage
+            // Hint: `.label` might be useful
+            const selectedLabel = newData[selectedIndex].label;
+            const filteredProjects = projects.filter(d => d.label === selectedLabel);
+            renderProjects(filteredProjects, projectsContainer, 'h2');
+          }
       });
   });
   let newLegend = d3.select('.legend');
