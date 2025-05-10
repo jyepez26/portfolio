@@ -1,0 +1,114 @@
+body {
+    /* Set line height to 1.5 times the font size
+         and use the OS’s UI font as the website font
+       */
+    font: 100%/1.5 system-ui;
+    max-width: 100ch;
+    margin-inline: max(1em, (100% - 100ch) / 2);
+  }
+  h1,h2,h3,h4,h5,h6{
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  h1{
+    font-size: 400%;
+  }
+  h2{
+    margin: 0;
+    font-size: 200%;
+  }
+  h3{
+    font-size: 150%;
+  }
+  circle {
+    transition: 200ms;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  circle:hover {
+    transform: scale(1.5);
+  }
+  .tooltip{
+    position: fixed;
+    top: 1em;
+    left: 1em;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    box-shadow:0.1ch;
+    border-radius: 2px;
+    backdrop-filter: 1em;
+    padding: 0.5em;
+  }
+  dl{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+  }
+  dl.info{
+    display: grid;
+    transition-duration: 500ms;
+    transition-property: opacity, visibility;
+  }
+  dl.info[hidden]:not(:hover, :focus-within) {
+    opacity: 0;
+    visibility: hidden;
+  }
+  dt{
+    grid-row-start: 1;
+    grid-row-end: 2;
+    font-size: 90%;
+    color: gray;
+  }
+  dd{
+    grid-row-start: 2;
+    grid-row-end: 3;
+    font-size: 150%;
+  }
+  .projects{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    gap: 1em;
+  }
+  :root{
+    --pink: oklch(65% 50% 0);
+    color-scheme: dark;
+  }
+  html{
+    accent-color: var(--pink);
+  }
+  nav{
+    display: flex;
+    --border-color: oklch(50% 10% 200 / 40%);
+  }
+  a{
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    padding: 0.5em;
+    margin-bottom: auto;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: oklch(80% 3% 200);
+  }
+  .current{
+    flex: 1;
+    border-bottom-width: 0.4em;
+    border-bottom-color: var(--border-color);
+    padding-bottom: 0.202em;
+  }
+  nav a:hover{
+    border-bottom-width: 0.4em;
+    border-bottom-color: oklch(65% 50% 0);
+    padding-bottom: 0.202em;
+    background-color: color-mix(in oklch, var(--pink), canvas 85%);
+  }
+  .color-scheme{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 80%;
+    font-family: inherit;
+  }
