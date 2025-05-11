@@ -28,16 +28,33 @@ body {
   circle:hover {
     transform: scale(1.5);
   }
+  circle.selected {
+    fill: #ff6b6b;
+  }
   .tooltip{
     position: fixed;
     top: 1em;
     left: 1em;
+    width: 25em;
     background-color: rgba(255, 255, 255, 0.8);
     color: black;
     box-shadow:0.1ch;
     border-radius: 2px;
     backdrop-filter: 1em;
     padding: 0.5em;
+  }
+  @keyframes marching-ants {
+    to {
+      stroke-dashoffset: -8; /* 5 + 3 */
+    }
+  }
+  
+  .selection {
+    fill-opacity: 0.1;
+    stroke: black;
+    stroke-opacity: 0.7;
+    stroke-dasharray: 5 3;
+    animation: marching-ants 2s linear infinite;
   }
   dl{
     display: grid;
