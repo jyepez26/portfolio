@@ -14,7 +14,25 @@
 
     <h2>Commits by time of day</h2>
     <br>
-    <div id="chart"></div>
+    <div id="scrollytelling">
+        <div id="scroll-container">
+            <div id="spacer"></div>
+            <div id="items-container">
+                <p>
+                On {commit.datetime.toLocaleString("en", {dateStyle: "full", timeStyle:
+                "short"})}, I made
+                <a href="{commit.url}" target="_blank">
+                    { index > 0 ? 'another glorious commit' : 'my first commit, and it was
+                    glorious' } </a
+                >. I edited {commit.totalLines} lines across { d3.rollups(commit.lines, D =>
+                D.length, d => d.file).length } files. Then I looked over all I had made, and
+                I saw that it was very good.
+                </p>
+            </div>
+        </div>
+        <div id="chart"></div>
+    </div>
+    
 
     <dl id="commit-tooltip" class="info tooltip" hidden>
         <dt>Commit</dt>
@@ -30,6 +48,30 @@
 
     <p id="selection-count">No commit(s) selected</p>
     <dl id="language-breakdown" class="stats"></dl>
+
+    <div id="slider">
+        <label> Show Commits Until: 
+            <input type="range" id="commit-slider" min="0" max="100" value="0">
+            <time id="selectedTime"></time>
+        </label>
+    </div>
+
+    <dl class="files">
+        <!-- we want the following structure for each file -->
+        <div>
+            <dt>
+            <code>{file.name}</code>
+            </dt>
+            <dd class="line-num">
+                {file.lines.length} lines
+            </dd>
+            <dd>
+                <div class="line"></div>
+            </dd>
+        </div>
+        <div>...</div>
+     </dl>
+    
 
     <script type="module" src="../global.js"></script>
     <script type="module" src="main.js"></script>

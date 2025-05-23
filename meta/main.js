@@ -44,6 +44,7 @@ function processCommits(data) {
 
 function renderCommitInfo(data, commits) {
     // Create the dl element
+    d3.select('.stats').remove(); // clear dl element so update works
     const dl = d3.select('#stats').append('dl').attr('class', 'stats');
 
     // Add total LOC
@@ -84,7 +85,8 @@ function renderTooltipContent(commit) {
     const date = document.getElementById('commit-date');
   
     if (Object.keys(commit).length === 0) return;
-  
+    
+    console.log(link);
     link.href = commit.url;
     link.textContent = commit.id;
     date.textContent = commit.datetime?.toLocaleString('en', {
@@ -172,11 +174,13 @@ function renderLanguageBreakdown(selection) {
 }
 
 // create plot
-function renderScatterPlot(data, commits){
+function updateScatterPlot(data, filteredCommits){
 
     // define dimensions
     const width = 1000;
     const height = 600;
+
+    d3.select('svg').remove();
 
     // create svg using d3
     const svg = d3
@@ -188,7 +192,7 @@ function renderScatterPlot(data, commits){
     // create x and y scale
     xScale = d3
         .scaleTime()
-        .domain(d3.extent(commits, (d) => d.datetime))
+        .domain(d3.extent(filteredCommits, (d) => d.datetime))
         .range([0, width])
         .nice();
 
@@ -210,6 +214,7 @@ function renderScatterPlot(data, commits){
     xScale.range([usableArea.left, usableArea.right]);
     yScale.range([usableArea.bottom, usableArea.top]);
 
+    svg.selectAll('g').remove();
     // Add gridlines
     const gridlines = svg
     .append('g')
@@ -226,7 +231,7 @@ function renderScatterPlot(data, commits){
     const yAxis = d3
         .axisLeft(yScale)
         .tickFormat((d) => String(d % 24).padStart(2, '0') + ':00');
-
+    
     // Add X axis
     svg
     .append('g')
@@ -240,6 +245,7 @@ function renderScatterPlot(data, commits){
     .call(yAxis);
 
 
+    
     // plot data
     const dots = svg.append('g').attr('class', 'dots');
 
@@ -250,16 +256,17 @@ function renderScatterPlot(data, commits){
     svg.selectAll('.dots, .overlay ~ *').raise();    
 
     // add radius constraints
-    const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
+    const [minLines, maxLines] = d3.extent(filteredCommits, (d) => d.totalLines);
 
     const rScale = d3.scaleSqrt().domain([minLines, maxLines]).range([5, 30]);
 
     // sort commits by total lines in descending order
-    const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
+    // const sortedCommits = d3.sort(filteredCommits, (d) => -d.totalLines);
 
+    dots.selectAll('circle').remove();
     dots
     .selectAll('circle')
-    .data(sortedCommits)
+    .data(filteredCommits)
     .join('circle')
     .attr('cx', (d) => xScale(d.datetime))
     .attr('cy', (d) => yScale(d.hourFrac))
@@ -278,12 +285,84 @@ function renderScatterPlot(data, commits){
       });
 }
 
+
 let data = await loadData();
 let commits = processCommits(data);
 
+// Render Plot and Commit Info
 
 renderCommitInfo(data, commits);
 
-renderScatterPlot(data, commits);
+updateScatterPlot(data, commits);
 
 console.log(commits);
+
+// let commitProgress = 100;
+let timeScale = d3.scaleTime(
+    [d3.min(commits, (d) => d.datetime), d3.max(commits, (d) => d.datetime)],
+    [0, 100],
+);
+const timeSlider = document.getElementById('commit-slider');
+function updateTimeDisplay(){
+    const commitProgress = Number(timeSlider.value);
+    const selectedTime = d3.select('#selectedTime');
+    selectedTime.text(timeScale.invert(commitProgress).toLocaleString());
+    let commitMaxTime = timeScale.invert(commitProgress);
+    let filteredCommits = d3.filter(commits, d => d.datetime <= commitMaxTime);
+    updateScatterPlot(data, filteredCommits);
+    renderCommitInfo(data, filteredCommits);
+
+    let lines = filteredCommits.flatMap((d) => d.lines);
+    let files = [];
+    files = d3
+    .groups(lines, (d) => d.file)
+    .map(([name, lines]) => {
+        return { name, lines };
+    });
+    files = d3.sort(files, (d) => -d.lines.length);
+    let fileTypeColors = d3.scaleOrdinal(d3.schemeTableau10);
+
+    d3.select('.files').selectAll('div').remove(); // don't forget to clear everything first so we can re-render
+    let filesContainer = d3.select('.files').selectAll('div').data(files).enter().append('div');
+
+    filesContainer.append('dt').append('code').text(d => d.name) // append file name
+    filesContainer.append('dd').selectAll('div').data(d => d.lines).enter().append('div').attr('class', 'line').style('background', (d) => fileTypeColors(d.type)); // append line data
+    filesContainer.append('line').text(d=>`${d.lines.length} lines`); // append file lines count
+}
+timeSlider.addEventListener('input', updateTimeDisplay);
+updateTimeDisplay();
+
+let NUM_ITEMS = 100; // Ideally, let this value be the length of your commit history
+let ITEM_HEIGHT = 30; // Feel free to change
+let VISIBLE_COUNT = 10; // Feel free to change as well
+let totalHeight = (NUM_ITEMS - 1) * ITEM_HEIGHT;
+const scrollContainer = d3.select('#scroll-container');
+const spacer = d3.select('#spacer');
+spacer.style('height', `${totalHeight}px`);
+const itemsContainer = d3.select('#items-container');
+scrollContainer.on('scroll', () => {
+  const scrollTop = scrollContainer.property('scrollTop');
+  let startIndex = Math.floor(scrollTop / ITEM_HEIGHT);
+  startIndex = Math.max(
+    0,
+    Math.min(startIndex, commits.length - VISIBLE_COUNT),
+  );
+  renderItems(startIndex);
+});
+
+function renderItems(startIndex) {
+    // Clear things off
+    itemsContainer.selectAll('div').remove();
+    const endIndex = Math.min(startIndex + VISIBLE_COUNT, commits.length);
+    let newCommitSlice = commits.slice(startIndex, endIndex);
+    // TODO: how should we update the scatterplot (hint: it's just one function call)
+    updateScatterPlot(data, newCommitSlice);
+    // Re-bind the commit data to the container and represent each using a div
+    itemsContainer.selectAll('div')
+                  .data(newCommitSlice)
+                  .enter()
+                  .append('div')
+                  // TODO: what should we include here? (read the next step)
+                  .style('position', 'absolute')
+                  .style('top', (_, idx) => `${idx * ITEM_HEIGHT}px`)
+}
