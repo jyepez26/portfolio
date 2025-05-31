@@ -70,29 +70,6 @@ body {
     height: 50vh;
   }
 
-  #scrolly-2 {
-    position: relative;
-    display: flex;
-    gap: 1rem;
-  
-    > * {
-      flex: 1;
-    }
-  }
-  
-  #scatter-story2 {
-    position: relative;
-  }
-
-  .files{
-    position: sticky;
-    top: 0;
-    left: 0;
-    bottom: auto;
-    height: 50vh;
-  }
-
-
   .item {
     height: 30px;
     padding: 10px;
