@@ -14,7 +14,7 @@
 
     <h2>Commits by time of day</h2>
     <br>
-    <div id="scrollytelling">
+    <!-- <div id="scrollytelling">
         <div id="scroll-container">
             <div id="spacer"></div>
             <div id="items-container">
@@ -29,9 +29,14 @@
                 I saw that it was very good.
                 </p>
             </div>
+        </div> -->
+        <div id="scrolly-1">
+            <div id="scatter-story"><strong>Timeline:</strong></div>
+            <div id="chart">
+                <!-- old code -->
+            </div>
+            <!-- <time id="selectedTime"></time> -->
         </div>
-        <div id="chart"></div>
-    </div>
     
 
     <dl id="commit-tooltip" class="info tooltip" hidden>
@@ -49,29 +54,27 @@
     <p id="selection-count">No commit(s) selected</p>
     <dl id="language-breakdown" class="stats"></dl>
 
-    <div id="slider">
-        <label> Show Commits Until: 
+    <!-- <div id="slider">
+        <label> 
+            <span>Show Commits Until:</span>
             <input type="range" id="commit-slider" min="0" max="100" value="0">
             <time id="selectedTime"></time>
         </label>
-    </div>
-
+    </div> -->
     <dl class="files">
         <!-- we want the following structure for each file -->
         <div>
             <dt>
-            <code>{file.name}</code>
+            <code></code>
             </dt>
             <dd class="line-num">
-                {file.lines.length} lines
             </dd>
             <dd>
                 <div class="line"></div>
             </dd>
         </div>
         <div>...</div>
-     </dl>
-    
+    </dl>
 
     <script type="module" src="../global.js"></script>
     <script type="module" src="main.js"></script>

@@ -1,4 +1,5 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
+import scrollama from 'https://cdn.jsdelivr.net/npm/scrollama@3.2.0/+esm';
 
 async function loadData() {
     const data = await d3.csv('loc.csv', (row) => ({
@@ -297,21 +298,46 @@ updateScatterPlot(data, commits);
 
 console.log(commits);
 
-// let commitProgress = 100;
 let timeScale = d3.scaleTime(
-    [d3.min(commits, (d) => d.datetime), d3.max(commits, (d) => d.datetime)],
-    [0, 100],
+  [d3.min(commits, (d) => d.datetime), d3.max(commits, (d) => d.datetime)],
+  [0, 100],
 );
-const timeSlider = document.getElementById('commit-slider');
-function updateTimeDisplay(){
-    const commitProgress = Number(timeSlider.value);
+
+const sortedCommits = d3.sort(commits, (d) => d.datetime);
+
+// Add scrollytelling area
+d3.select('#scatter-story')
+  .selectAll('.step')
+  .data(sortedCommits)
+  .join('div')
+  .attr('class', 'step')
+  .html(
+    (d, i) => `
+		On ${d.datetime.toLocaleString('en', {
+      dateStyle: 'full',
+      timeStyle: 'short',
+    })},
+		I made <a href="${d.url}" target="_blank">${
+      i > 0 ? 'another glorious commit' : 'my first commit, and it was glorious'
+    }</a>.
+		I edited ${d.totalLines} lines across ${
+      d3.rollups(
+        d.lines,
+        (D) => D.length,
+        (d) => d.file,
+      ).length
+    } files.
+		Then I looked over all I had made, and I saw that it was very good.
+	`,
+  );
+
+  function onStepEnter(response) {
+    const timeValue = response.element.__data__.datetime;
+    let filteredCommits = d3.filter(sortedCommits, d => d.datetime <= timeValue);
     const selectedTime = d3.select('#selectedTime');
-    selectedTime.text(timeScale.invert(commitProgress).toLocaleString());
-    let commitMaxTime = timeScale.invert(commitProgress);
-    let filteredCommits = d3.filter(commits, d => d.datetime <= commitMaxTime);
+    selectedTime.text(timeValue);
     updateScatterPlot(data, filteredCommits);
     renderCommitInfo(data, filteredCommits);
-
     let lines = filteredCommits.flatMap((d) => d.lines);
     let files = [];
     files = d3
@@ -328,41 +354,45 @@ function updateTimeDisplay(){
     filesContainer.append('dt').append('code').text(d => d.name) // append file name
     filesContainer.append('dd').selectAll('div').data(d => d.lines).enter().append('div').attr('class', 'line').style('background', (d) => fileTypeColors(d.type)); // append line data
     filesContainer.append('line').text(d=>`${d.lines.length} lines`); // append file lines count
-}
-timeSlider.addEventListener('input', updateTimeDisplay);
-updateTimeDisplay();
+  }
+  
+  const scroller = scrollama();
+  scroller
+    .setup({
+      container: '#scrolly-1',
+      step: '#scrolly-1 .step',
+    })
+    .onStepEnter(onStepEnter);
+    
 
-let NUM_ITEMS = 100; // Ideally, let this value be the length of your commit history
-let ITEM_HEIGHT = 30; // Feel free to change
-let VISIBLE_COUNT = 10; // Feel free to change as well
-let totalHeight = (NUM_ITEMS - 1) * ITEM_HEIGHT;
-const scrollContainer = d3.select('#scroll-container');
-const spacer = d3.select('#spacer');
-spacer.style('height', `${totalHeight}px`);
-const itemsContainer = d3.select('#items-container');
-scrollContainer.on('scroll', () => {
-  const scrollTop = scrollContainer.property('scrollTop');
-  let startIndex = Math.floor(scrollTop / ITEM_HEIGHT);
-  startIndex = Math.max(
-    0,
-    Math.min(startIndex, commits.length - VISIBLE_COUNT),
-  );
-  renderItems(startIndex);
-});
+// // Update scatter plot and commit info
 
-function renderItems(startIndex) {
-    // Clear things off
-    itemsContainer.selectAll('div').remove();
-    const endIndex = Math.min(startIndex + VISIBLE_COUNT, commits.length);
-    let newCommitSlice = commits.slice(startIndex, endIndex);
-    // TODO: how should we update the scatterplot (hint: it's just one function call)
-    updateScatterPlot(data, newCommitSlice);
-    // Re-bind the commit data to the container and represent each using a div
-    itemsContainer.selectAll('div')
-                  .data(newCommitSlice)
-                  .enter()
-                  .append('div')
-                  // TODO: what should we include here? (read the next step)
-                  .style('position', 'absolute')
-                  .style('top', (_, idx) => `${idx * ITEM_HEIGHT}px`)
-}
+// const timeSlider = document.getElementById('commit-slider');
+// function updateTimeDisplay(){
+//     const commitProgress = Number(timeSlider.value);
+
+//     let commitMaxTime = timeScale.invert(commitProgress);
+//     let filteredCommits = d3.filter(commits, d => d.datetime <= commitMaxTime);
+//     updateScatterPlot(data, filteredCommits);
+//     renderCommitInfo(data, filteredCommits);
+
+//     let lines = filteredCommits.flatMap((d) => d.lines);
+//     let files = [];
+//     files = d3
+//     .groups(lines, (d) => d.file)
+//     .map(([name, lines]) => {
+//         return { name, lines };
+//     });
+//     files = d3.sort(files, (d) => -d.lines.length);
+//     let fileTypeColors = d3.scaleOrdinal(d3.schemeTableau10);
+
+//     d3.select('.files').selectAll('div').remove(); // don't forget to clear everything first so we can re-render
+//     let filesContainer = d3.select('.files').selectAll('div').data(files).enter().append('div');
+
+//     filesContainer.append('dt').append('code').text(d => d.name) // append file name
+//     filesContainer.append('dd').selectAll('div').data(d => d.lines).enter().append('div').attr('class', 'line').style('background', (d) => fileTypeColors(d.type)); // append line data
+//     filesContainer.append('line').text(d=>`${d.lines.length} lines`); // append file lines count
+// }
+// timeSlider.addEventListener('input', updateTimeDisplay);
+// updateTimeDisplay();
+
